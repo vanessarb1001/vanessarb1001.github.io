@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CellOx</title>
+    <link rel="stylesheet" href="Estilo_menu.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+
+    <!--Insertar imagen de logo-->
+    <div class="logo">
+        <img src="CX.png" alt="Logotipo CelLoX" width="100"/>
+    </div>
+    <h1 style="text-align: center;">CellOx</h1>
+
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showSection('inicio')">Inicio</a></li>
+            <li><a href="#" onclick="showSection('servicios')">Servicios</a></li>
+            <li><a href="#" onclick="showSection('productos')">Productos</a></li>
+            <li><a href="#" onclick="showSection('contacto')">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="inicio" class="active">
+            <h1>Bienvenido a CellOx</h1>
+            <p>Tu solución tecnológica integral.</p>
+        </section>
+
+        <section id="servicios">
+            <h2>Nuestros Servicios:</h2>
+            <ul>
+                <p>Reparación de Computadoras</p>
+                <p>Venta de Accesorios</p>
+                <p>Instalación de Redes</p>
+                <p>Asesoramiento Técnico</p>
+                <p>Recuperación de Datos</p>
+                <p>Servicio de Mantenimiento</p>
+                <p>Actualización de Software</p>
+                <p>Configuración de Dispositivos</p>
+                <p>Cursos de Tecnología</p>
+                <p>Consultoría en Seguridad</p>
+            </ul>
+        </section>
+
+        <section id="productos">
+            <h1>Catálogo de Productos</h1>
+            <input type="text" id="barra-busqueda" placeholder="Buscar productos...">
+            <button onclick="buscarProductos()">Buscar</button>
+            <div class="catalogo">
+                <div class="productos">
+                    <div class="producto">
+                        <img src="producto1.jpg" alt="Producto 1">
+                        <h3>Samsung Galaxy S23 Ultra</h3>
+                        <p>Categoria de producto: Celular</p>
+                        <p>Precio: $899</p>
+                        <button onclick="agregarProducto('Samsung Galaxy S23 Ultra', 899)">Agregar al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto">
+            <h1>Contacto</h1>
+            <p><strong>Teléfono:</strong> (123) 456-7890</p>
+            <p><strong>Email:</strong> info@cellox.com</p>
+            <p><strong>Dirección:</strong> Calle Principal #123, Ciudad, País</p>
+
+            <h2>Redes sociales</h2>
+            <ul>
+                <li><a href="https://facebook.com/cellox" target="_blank">Facebook</a></li>
+                <li><a href="https://twitter.com/cellox" target="_blank">Twitter</a></li>
+                <li><a href="https://instagram.com/cellox" target="_blank">Instagram</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 CellOx - Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Función para mostrar la sección activa
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('main section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar solo la sección seleccionada
+            const selectedSection = document.getElementById(sectionId);
+            selectedSection.classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
