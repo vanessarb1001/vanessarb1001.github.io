@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Validación de Cédula Dominicana</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Validar Cédula Dominicana</h2>
+        <form id="cedulaForm">
+            <input type="text" id="cedulaInput" placeholder="Ingresa tu cédula" maxlength="11" required>
+            <button type="submit">Validar</button>
+            <p id="result"></p>
+        </form>
+    </div>
+    <script src="validarCedula.js"></script>
+    <script>
+        // Captura el formulario y el campo de entrada
+        const form = document.getElementById('cedulaForm');
+        const input = document.getElementById('cedulaInput');
+        const result = document.getElementById('result');
+
+        // Manejo del evento submit para validar la cédula
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const cedula = input.value.trim();
+            
+            // Validar que el input solo contenga números
+            if (!/^\d{11}$/.test(cedula)) {
+                result.textContent = 'La cédula debe contener 11 dígitos numéricos.';
+                result.style.color = 'red';
+                return;
+            }
+
+            // Usar la función de validarCedula del archivo JavaScript
+            if (validarCedula(cedula)) {
+                result.textContent = 'La cédula es válida.';
+                result.style.color = 'green';
+            } else {
+                result.textContent = 'La cédula es inválida.';
+                result.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>

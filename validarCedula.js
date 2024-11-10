@@ -11,8 +11,8 @@ function validarCedula(cedula) {
         numeros[i] *= 2;
 
         // Si el resultado es mayor a 11, restar 11
-        if (numeros[i] > 9) {
-            numeros[i] -= 9;
+        if (numeros[i] > 11) {
+            numeros[i] -= 11;
         }
     }
 
