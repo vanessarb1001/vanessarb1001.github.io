@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario Multipágina</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="form-container">
+        <!-- Página 1: Datos Personales -->
+        <form id="page1" class="form-page">
+            <h2>Datos Personales</h2>
+            <input type="text" id="nombre" placeholder="Nombre Completo" required><br>
+            <input type="text" id="direccion" placeholder="Dirección"><br>
+            <button type="button" onclick="nextPage(2)">Siguiente</button>
+        </form>
+
+        <!-- Página 2: Familiares -->
+        <form id="page2" class="form-page" style="display:none;">
+            <h2>Familiares</h2>
+            <input type="text" id="familiarNombre" placeholder="Nombre"><br>
+            <input type="text" id="parentesco" placeholder="Parentesco"><br>
+            <input type="number" id="edad" placeholder="Edad"><br>
+            <button type="button" onclick="addFamiliar()">Agregar Familiar</button>
+            <ul id="familiares-list"></ul>
+            <button type="button" onclick="prevPage(1)">Anterior</button>
+            <button type="button" onclick="nextPage(3)">Siguiente</button>
+        </form>
+
+        <!-- Página 3: Condiciones de Salud -->
+        <form id="page3" class="form-page" style="display:none;">
+            <h2>Condiciones Pre-Existentes</h2>
+            <input type="text" id="enfermedad" placeholder="Enfermedad"><br>
+            <input type="number" id="tiempo" placeholder="Años con la Enfermedad"><br>
+            <button type="button" onclick="addEnfermedad()">Agregar Condición</button>
+            <ul id="enfermedades-list"></ul>
+            <button type="button" onclick="prevPage(2)">Anterior</button>
+            <button type="button" onclick="nextPage(4)">Siguiente</button>
+        </form>
+
+        <!-- Página 4: Internamientos -->
+        <form id="page4" class="form-page" style="display:none;">
+            <h2>Internamientos Realizados</h2>
+            <input type="date" id="fecha"><br>
+            <input type="text" id="centroMedico" placeholder="Centro Médico"><br>
+            <input type="text" id="diagnostico" placeholder="Diagnóstico"><br>
+            <button type="button" onclick="addInternamiento()">Agregar Internamiento</button>
+            <ul id="internamientos-list"></ul>
+            <button type="button" onclick="prevPage(3)">Anterior</button>
+            <button type="button" onclick="nextPage(5)">Siguiente</button>
+        </form>
+
+        <!-- Página 5: Mostrar Datos -->
+        <div id="page5" class="form-page" style="display:none;">
+            <h2>Resumen de Datos</h2>
+            <pre id="data-summary"></pre>
+            <button type="button" onclick="prevPage(4)">Anterior</button>
+            <button type="button" onclick="guardarDatos()">Guardar Datos</button>
+        </div>
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
