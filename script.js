@@ -1,79 +1,79 @@
-const data = {
-    datosPersonales: {},
-    familiares: [],
-    enfermedades: [],
-    internamientos: []
-};
+document.addEventListener('DOMContentLoaded', () => {
+    const generateButton = document.getElementById('generateButton');
+    const clearButton = document.getElementById('clearButton');
+    const contactListContainer = document.getElementById('contactList');
 
-function nextPage(page) {
-    document.querySelectorAll('.form-page').forEach((form) => form.style.display = 'none');
-    document.getElementById(`page${page}`).style.display = 'block';
-    if (page === 5) mostrarResumen();
-}
+    // Cargar contactos al iniciar
+    loadContacts();
 
-function prevPage(page) {
-    nextPage(page);
-}
+    generateButton.addEventListener('click', () => {
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const address = document.getElementById('address').value;
 
-function addFamiliar() {
-    const nombre = document.getElementById('familiarNombre').value;
-    const parentesco = document.getElementById('parentesco').value;
-    const edad = document.getElementById('edad').value;
+        if (!name || !phone || !email) {
+            alert("Por favor, completa los campos obligatorios.");
+            return;
+        }
 
-    if (nombre && parentesco && edad) {
-        data.familiares.push({ nombre, parentesco, edad });
-        document.getElementById('familiares-list').innerHTML += `<li>${nombre} - ${parentesco} - ${edad} años</li>`;
-        document.getElementById('familiarNombre').value = '';
-        document.getElementById('parentesco').value = '';
-        document.getElementById('edad').value = '';
+        // Crear un objeto de contacto
+        const contact = { name, phone, email, address };
+
+        // Guardar contacto en almacenamiento local
+        saveContact(contact);
+
+        // Mostrar todos los contactos con sus códigos QR
+        displayContacts();
+    });
+
+    clearButton.addEventListener('click', () => {
+        if (confirm("¿Estás seguro de que deseas eliminar todos los contactos?")) {
+            localStorage.removeItem('contacts');
+            contactListContainer.innerHTML = '';
+        }
+    });
+
+    function saveContact(contact) {
+        let contacts = JSON.parse(localStorage.getItem('contacts')) || [];
+        contacts.push(contact);
+        localStorage.setItem('contacts', JSON.stringify(contacts));
     }
-}
 
-function addEnfermedad() {
-    const enfermedad = document.getElementById('enfermedad').value;
-    const tiempo = document.getElementById('tiempo').value;
-
-    if (enfermedad && tiempo) {
-        data.enfermedades.push({ enfermedad, tiempo });
-        document.getElementById('enfermedades-list').innerHTML += `<li>${enfermedad} - ${tiempo} años</li>`;
-        document.getElementById('enfermedad').value = '';
-        document.getElementById('tiempo').value = '';
+    function loadContacts() {
+        displayContacts();
     }
-}
 
-function addInternamiento() {
-    const fecha = document.getElementById('fecha').value;
-    const centroMedico = document.getElementById('centroMedico').value;
-    const diagnostico = document.getElementById('diagnostico').value;
+    function displayContacts() {
+        contactListContainer.innerHTML = ''; // Limpiar lista actual
+        const contacts = JSON.parse(localStorage.getItem('contacts')) || [];
 
-    if (fecha && centroMedico && diagnostico) {
-        data.internamientos.push({ fecha, centroMedico, diagnostico });
-        document.getElementById('internamientos-list').innerHTML += `<li>${fecha} - ${centroMedico} - ${diagnostico}</li>`;
-        document.getElementById('fecha').value = '';
-        document.getElementById('centroMedico').value = '';
-        document.getElementById('diagnostico').value = '';
+        contacts.forEach((contact, index) => {
+            const qrContainer = document.createElement('div');
+            qrContainer.classList.add('qr-container');
+
+            const qrCodeDiv = document.createElement('div');
+            const qrCode = new QRCode(qrCodeDiv, {
+                text: formatVCard(contact),
+                width: 128,
+                height: 128,
+            });
+
+            const contactInfo = document.createElement('div');
+            contactInfo.innerHTML = `
+                <strong>${contact.name}</strong><br>
+                Tel: ${contact.phone}<br>
+                Email: ${contact.email}<br>
+                Dirección: ${contact.address || 'N/A'}
+            `;
+
+            qrContainer.appendChild(qrCodeDiv);
+            qrContainer.appendChild(contactInfo);
+            contactListContainer.appendChild(qrContainer);
+        });
     }
-}
 
-function mostrarResumen() {
-    const resumen = `
-    Datos Personales:
-    Nombre: ${data.datosPersonales.nombre || ''} 
-    Dirección: ${data.datosPersonales.direccion || ''}
-    
-    Familiares: ${JSON.stringify(data.familiares, null, 2)}
-    
-    Enfermedades: ${JSON.stringify(data.enfermedades, null, 2)}
-    
-    Internamientos: ${JSON.stringify(data.internamientos, null, 2)}
-    `;
-    document.getElementById('data-summary').textContent = resumen;
-}
-
-function guardarDatos() {
-    const nombre = document.getElementById('nombre').value;
-    const direccion = document.getElementById('direccion').value;
-    data.datosPersonales = { nombre, direccion };
-    localStorage.setItem('formData', JSON.stringify(data));
-    alert("Datos guardados exitosamente!");
-}
+    function formatVCard(contact) {
+        return `BEGIN:VCARD\nVERSION:3.0\nFN:${contact.name}\nTEL:${contact.phone}\nEMAIL:${contact.email}\nADR:${contact.address}\nEND:VCARD`;
+    }
+});

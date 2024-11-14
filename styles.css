@@ -1,53 +1,68 @@
-/* Estilos básicos para el formulario */
 body {
     font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f0f0f0;
-    margin: 0;
+    padding: 0 20px;
 }
 
 .container {
-    background-color: #ffffff;
+    width: 100%;
+    max-width: 400px;
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
     text-align: center;
 }
 
-h2 {
+.input-group {
     margin-bottom: 15px;
-    color: #333;
 }
 
-input[type="text"] {
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
+    padding: 8px;
+    box-sizing: border-box;
 }
 
 button {
     width: 100%;
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #007BFF;
     color: #fff;
     border: none;
-    border-radius: 4px;
-    font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
-p#result {
-    margin-top: 10px;
-    font-size: 16px;
+#contactList {
+    margin-top: 20px;
+}
+
+.qr-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.qr-container div {
+    margin-left: 10px;
 }
