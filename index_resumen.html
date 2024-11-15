@@ -1,0 +1,49 @@
+<!--Pagina con un resumen sobre AJAX-->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resumen sobre AJAX y ejemplo de su funcionamiento</title>
+</head>
+<body>
+    <h1>Resumen sobre AJAX</h1>
+    <p>AJAX es un patrón de diseño para crear aplicaciones web que interactúan con el servidor sin recargar la página completa. Esto permite actualizar partes de la interfaz sin necesidad de recargar la totalidad de la página.</p>
+    <p>Algunas de las ventajas de AJAX son:</p>
+
+    <ul>
+        <li>Actualización parcial de la página</li>
+        <li>Reducción de tiempo de carga</li>
+        <li>Mejoras en la experiencia de usuario</li>
+    </ul
+
+    <p>Para usar AJAX en HTML, se puede utilizar la etiqueta <code>&lt;script&gt;</code> con el atributo <code>src</code> para cargar el código JavaScript que implementa AJAX.</p>
+    <p>Para realizar solicitudes AJAX, se puede utilizar el objeto <code>XMLHttpRequest</code> o el objeto <code>fetch</code> (nativo en los navegadores modernos).</p>
+    <p>Un ejemplo de cómo usar AJAX para cargar información de un usuario:</p>
+    <pre>
+    <code>
+    const userId = 1; // ID del usuario a cargar
+    
+    fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
+     .then(response => response.json())
+     .then(user => {
+        document.getElementById('userInfo').innerHTML = `
+        Nombre: ${user.name}
+        Email: ${user.email}
+        Teléfono: ${user.phone}
+        `;
+    });
+    </code>
+    </pre>
+    <p>A continuacion un ejemplo del implente del AJAX.</p>
+  <h1>Buscar información de usuario</h1>
+  
+  <button id="loadUserBtn">Cargar información del usuario</button>
+  
+  <div id="userInfo">
+    <!-- Aquí se mostrará la información del usuario -->
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
